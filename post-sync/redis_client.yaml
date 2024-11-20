@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata: 
+  name: redis-client
+  labels:
+    app: redis-client
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    metadata:
+      labels:
+        app: redis-client
+    spec:
+      securityContext: 
+        runAsUser: 0
+      containers:
+        - name: redis-client
+          image: docker.io/bitnami/redis:7.2.5-debian-12-r0
+          command: ["bin/bash", "-c", "redis-benchmark -h my-redis-master -a $REDIS_PASSWORD -q -n 1000 > /clientdata/benchmark/results.txt"]
+          env:
+          - name: REDIS_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: my-redis
+                key: redis-password
+          volumeMounts:
+          - mountPath: /clientdata/benchmark
+            name: test-data
+      restartPolicy: Never
+      volumes:
+      - name: test-data
+        persistentVolumeClaim: 
+          claimName: redis-test-data
