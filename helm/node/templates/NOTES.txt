@@ -1,0 +1,1 @@
+Node application installed! In order to access the application, please install a webserver (e.g. nginx) that listens on port {{ .Values.service.port }}.

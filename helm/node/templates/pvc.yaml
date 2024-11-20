@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-test-data
+  namespace: {{ .Values.namespace }}
+spec:
+  accessModes: {{ .Values.accessModes }}
+  volumeMode: {{ .Values.Filesystem }}
+  storageClassName: {{ .Values.storageClassName }}
+  {{- with .Values.resources }}
+  resources: 
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
