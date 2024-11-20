@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="/css/main.css">
+   </head>
+<header>
+   <div id="top-header">
+      <!-- logo -->
+      <div id="logo">
+         <img src="/images/logo_edited.png">
+      </div>
+   </div>
+</header>
+<body>
+   <h3>Use the below form to add or update key values in your database:</h3>
+   <form action="/addkey" method="POST"> 
+      <label>Key: <input type="text" name="key"/></label><br>
+      <label>Value: <input type="text" name="value"/></label><br>
+      <button type="submit"> Submit </button> 
+   </form><br>
+   <form action="/viewdb" method="GET">
+      <button name="db" value="redis">View database details</button>
+   </form><br>
+   <form action="/viewtests" method="GET">
+      <button name="benchmark" value="results">View benchmark results</button>
+   </form>
+</body>
+</html>
